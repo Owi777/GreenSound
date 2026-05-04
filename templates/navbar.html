@@ -1,0 +1,30 @@
+<nav>
+    <div class="logo">GreenSound</div>
+
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+    <div class="nav-links" id="navLinks">
+        <a href="/">Sākums</a>
+        <a href="/product">Produkts</a>
+        <a href="/about">Par mums</a>
+        <a href="/contact">Kontakti</a>
+        <a href="/admin/login">Admin</a>
+    </div>
+</nav>
+
+<script>
+function toggleMenu() {
+    const menu = document.getElementById("navLinks");
+    menu.classList.toggle("show");
+}
+
+// close when clicking outside
+document.addEventListener("click", function(e) {
+    const menu = document.getElementById("navLinks");
+    const button = document.querySelector(".menu-btn");
+
+    if (!menu.contains(e.target) && !button.contains(e.target)) {
+        menu.classList.remove("show");
+    }
+});
+</script>
