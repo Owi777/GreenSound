@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Sākums - GreenSound{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-text">
+        <h1>Bezvadu skaņa. Tumšs dizains.</h1>
+        <p>Mūsdienīgas bezvadu austiņas ar LED displeju, ilgu baterijas darbības laiku un futūristisku zaļo dizainu.</p>
+        <a class="main-btn" href="/product">Skatīt produktu</a>
+    </div>
+
+    <div class="hero-card">
+        <h2>{{ product.name }}</h2>
+
+        <video autoplay muted loop playsinline class="hero-video">
+            <source src="/static/videos/{{ product.video }}" type="video/mp4">
+        </video>
+
+        <p class="price">€{{ product.price }}</p>
+        <p>Pieejami: {{ product.stock }}</p>
+    </div>
+</section>
+{% endblock %}
