@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Admin login - GreenSound{% endblock %}
+
+{% block content %}
+<section class="page">
+    <div class="content-card">
+        <h1>Admin pieslēgšanās</h1>
+
+        {% if error %}
+            <p style="color: red;">{{ error }}</p>
+        {% endif %}
+
+        <form action="/admin/login" method="POST">
+            <input type="password" name="password" placeholder="Ievadi paroli" required>
+            <button type="submit">Pieslēgties</button>
+        </form>
+    </div>
+</section>
+{% endblock %}
