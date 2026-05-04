@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="page">
+    <div class="content-card">
+        <h1>📩 Saņemtie ziņojumi</h1>
+
+        {% if messages|length == 0 %}
+            <p>Nav neviena ziņojuma.</p>
+        {% else %}
+
+        <div class="table-wrapper">
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Vārds</th>
+                        <th>Email</th>
+                        <th>Ziņa</th>
+                        <th>Darbība</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for m in messages %}
+                    <tr>
+                        <td>{{ m.id }}</td>
+                        <td>{{ m.name }}</td>
+                        <td>{{ m.email }}</td>
+                        <td class="message-cell">{{ m.message }}</td>
+                        <td>
+                            <a href="/delete_message/{{ m.id }}">
+                                <button class="delete-btn">Dzēst</button>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        {% endif %}
+    </div>
+</section>
+
+{% endblock %}
