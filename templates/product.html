@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}Produkts - GreenSound{% endblock %}
+
+{% block content %}
+<section class="page">
+    <div class="product-layout">
+
+        <div class="image-box">
+
+            <div class="media-viewer">
+                <div class="media-container">
+                    <button class="arrow left" onclick="previousMedia()">❮</button>
+
+                    <div id="mediaContainer"></div>
+
+                    <button class="arrow right" onclick="nextMedia()">❯</button>
+                </div>
+            </div>
+
+            <div class="gallery">
+                {% for img in images %}
+                    <img src="/static/pictures/{{ img.image }}" onclick="setMedia({{ loop.index0 }})">
+                {% endfor %}
+            </div>
+
+        </div>
+
+        <div class="details-box">
+            <h1>{{ product.name }}</h1>
+            <p>{{ product.description }}</p>
+
+            <ul>
+                {% for f in features %}
+                    <li>{{ f.feature }}</li>
+                {% endfor %}
+            </ul>
+
+            <p class="price">€{{ product.price }}</p>
+            <p>Pieejami: {{ product.stock }}</p>
+
+            <a href="/order"><button>Pirkt</button></a>
+        </div>
+
+    </div>
+</section>
+
+<script>
+const media = [
+    {% for img in images %}
+    {
+        type: "image",
+        src: "/static/pictures/{{ img.image }}"
+    },
+    {% endfor %}
+    {
+        type: "video",
+        src: "/static/videos/{{ product.video }}"
+    }
+];
+
+let currentMedia = 0;
+
+function renderMedia() {
+    const container = document.getElementById("mediaContainer");
+    const item = media[currentMedia];
+
+    if (item.type === "video") {
+        container.innerHTML = `
+            <video controls autoplay muted loop playsinline class="product-video">
+                <source src="${item.src}" type="video/mp4">
+            </video>
+        `;
+    } else {
+        container.innerHTML = `
+            <img src="${item.src}" class="product-image">
+        `;
+    }
+}
+
+function setMedia(index) {
+    currentMedia = index;
+    renderMedia();
+}
+
+function nextMedia() {
+    currentMedia = (currentMedia + 1) % media.length;
+    renderMedia();
+}
+
+function previousMedia() {
+    currentMedia = (currentMedia - 1 + media.length) % media.length;
+    renderMedia();
+}
+
+document.addEventListener("DOMContentLoaded", renderMedia);
+</script>
+{% endblock %}
