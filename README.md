@@ -1,1 +1,1 @@
-Šeit ir vienkārš mājas lapa kods skolas projektam.
+Šeit ir vienkārš mājas lapas kods skolas projektam.
